@@ -23,16 +23,14 @@ public class PersonManager : MonoBehaviour
 
     [SerializeField] private string dialogues;
     [SerializeField] private string names;
-    private List<string> dialoguesList = new();
-    private List<string> namesList = new();
+    private string[] dialoguesList;
+    private string[] namesList;
 
 
     void Start()
     {
-        var d = dialogues.Split('/');
-        foreach (var dialogue in d) dialoguesList.Add(dialogue);
-        var n = names.Split('/');
-        foreach (var title in n) namesList.Add(title);
+        dialoguesList = dialogues.Split("/");
+        namesList = names.Split("/");
     }
 
     void Update()
@@ -40,6 +38,6 @@ public class PersonManager : MonoBehaviour
         
     }
 
-    public string RandomName() => namesList[Random.Range(0, namesList.Count)];
-    public string RandomDialogue() => dialoguesList[Random.Range(0, dialoguesList.Count)];
+    public string RandomName() => namesList[Random.Range(0, namesList.Length - 1)];
+    public string RandomDialogue() => dialoguesList[Random.Range(0, dialoguesList.Length - 1)];
 }

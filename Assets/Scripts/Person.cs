@@ -25,8 +25,6 @@ public class Person : MonoBehaviour
         title = manager.RandomName();
         dialogue = manager.RandomDialogue();
 
-        Debug.Log("asdfjlasdf");
-
         //remove later
         SaySomething();
     }
