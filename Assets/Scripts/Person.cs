@@ -8,14 +8,24 @@ public class Person : MonoBehaviour
     private PersonManager manager;
     private string title, dialogue; //unity was getting mad that i had a variable named name
     [SerializeField] private TextMeshProUGUI dialogueText;
+    private void Start()
+    {
+        StartCoroutine(nameof(LateStartCoroutine));
+    }
+    IEnumerator LateStartCoroutine()
+    {
+        yield return null;
+        LateStart();
+    }
     void LateStart()
     {
         manager = PersonManager.Instance;
         manager.People.Add(this.gameObject);
 
-        title = manager.NamesList[Random.Range(0, manager.NamesList.Count - 1)]; //this is bad code fix later
-        dialogue = manager.DialoguesList[Random.Range(0, manager.DialoguesList.Count - 1)];
+        title = manager.RandomName();
+        dialogue = manager.RandomDialogue();
 
+        Debug.Log("asdfjlasdf");
 
         //remove later
         SaySomething();

@@ -24,9 +24,7 @@ public class PersonManager : MonoBehaviour
     [SerializeField] private string dialogues;
     [SerializeField] private string names;
     private List<string> dialoguesList = new();
-    [HideInInspector] public List<string> DialoguesList { get { return dialoguesList; } }
     private List<string> namesList = new();
-    [HideInInspector] public List<string> NamesList { get { return namesList; } }
 
 
     void Start()
@@ -41,4 +39,7 @@ public class PersonManager : MonoBehaviour
     {
         
     }
+
+    public string RandomName() => namesList[Random.Range(0, namesList.Count)];
+    public string RandomDialogue() => dialoguesList[Random.Range(0, dialoguesList.Count)];
 }
