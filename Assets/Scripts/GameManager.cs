@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
             _instance = this;
     }
     #endregion
-    [SerializeField] private GameObject scorePanel, oopsPanel, timepanel;
+    [SerializeField] private GameObject scorePanel, oopsPanel, timepanel, gameoverScreen;
     [SerializeField] private GameObject stillfish, animfish;
     [SerializeField] private GameObject musicPlayer;
     [SerializeField] private GameObject player, line;
@@ -49,8 +50,6 @@ public class GameManager : MonoBehaviour
         timepanel.SetActive(false);
         player.SetActive(false);
         line.SetActive(false);
-
-        timeLeft = musicPlayer.GetComponent<AudioSource>().clip.length;
     }
 
     void Update()
@@ -133,6 +132,24 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        StartCoroutine(EndGameCoroutine());
+    }
 
+    IEnumerator EndGameCoroutine()
+    {
+        yield return null;
+        /*float timeElapsed = 0;
+        while (timeElapsed < 2)
+        {
+            player.transform.position = Vector3.Lerp(player.transform.position, new Vector3(0, 20)
+                , timeElapsed / 2);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }*/
+        gameoverScreen.SetActive(true);
+    }
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }
