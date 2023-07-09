@@ -68,6 +68,7 @@ public class SoundManager : MonoBehaviour
 public enum SoundType
 {
     Honk,
+    Swoosh,
     Click //add more types
 }
 

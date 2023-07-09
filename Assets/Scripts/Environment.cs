@@ -37,14 +37,18 @@ public class Environment : MonoBehaviour
     #endregion
     private void Update()
     {
-        //the player should descend faster when closer to the bottom of the screen
-        float playerPositionMultiplier = (7 - player.transform.position.y) * playerPositionWeighting;
-        //move this gameobject upwards each frame
-        movement = Vector3.up * speedmultiplier * playerPositionMultiplier * Time.deltaTime;
-        transform.position += movement;
-        totalOffset += movement;
-        //PlayerMovement.Instance.UpdateString();
-        Debug.Log(totalOffset);
+        if (GameManager.Instance.InRound)
+        {
+            //the player should descend faster when closer to the bottom of the screen
+            float playerPositionMultiplier = (7 - player.transform.position.y) * playerPositionWeighting;
+            //move this gameobject upwards each frame
+            movement = Vector3.up * speedmultiplier * playerPositionMultiplier * Time.deltaTime;
+            transform.position += movement;
+            totalOffset += movement;
+            //PlayerMovement.Instance.UpdateString();
+            //Debug.Log(totalOffset);
+        }
+        
 
         //if (totalOffset.y > 11.7655f + 4.290522f * backgroundCounter)
         //{

@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -107,11 +109,26 @@ public class PlayerMovement : MonoBehaviour
         transform.position = newPos;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag.Equals("person"))
         {
+            //var list = new ContactPoint2D[0];
+            //collision.GetContacts(list);
+
+            var colpos = collision.gameObject.transform.position;
+            var currpos = transform.position;
+
             collision.gameObject.GetComponent<Person>().SaySomething();
+            var x = DOTween.Sequence();
+            //CameraManager.Instance.ShakeCamera();
+            CameraManager.Instance.BounceCamera();
+            x.AppendInterval(0.5f);
+            x.Append(collision.gameObject.transform.DOMove(Vector3.Lerp(colpos, currpos, 0.5f), 0.25f).OnComplete(() =>
+            {
+                collision.gameObject.transform.DOScale(Vector3.zero, 0.3f);
+                //collision.gameObject.transform.parent = transform;
+            }));
         }
     }
 }

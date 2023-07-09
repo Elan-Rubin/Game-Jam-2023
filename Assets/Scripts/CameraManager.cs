@@ -31,4 +31,8 @@ public class CameraManager : MonoBehaviour
     {
         transform.DOShakePosition(0.25f);
     }
+    public void BounceCamera()
+    {
+        GetComponent<Camera>().DOOrthoSize(4.8f, 0.1f).OnComplete(() => GetComponent<Camera>().DOOrthoSize(5, 0.1f));
+    }
 }
