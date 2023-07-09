@@ -38,6 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 position;
     private int counter;
     [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private GameObject particles;
 
     private List<Vector3> previousPositions = new();
 
@@ -125,18 +126,22 @@ public class PlayerMovement : MonoBehaviour
             var x = DOTween.Sequence();
             //CameraManager.Instance.ShakeCamera();
             CameraManager.Instance.BounceCamera();
-            x.AppendInterval(0.5f);
+            x.AppendInterval(0.85f);
             x.Append(collision.gameObject.transform.DOMove(Vector3.Lerp(colpos, currpos, 0.5f), 0.25f).OnComplete(() =>
             {
                 collision.gameObject.transform.DOScale(Vector3.zero, 0.3f);
                 //collision.gameObject.transform.parent = transform;
             }));
+            GameManager.Instance.MakeMoney((int)Environment.Instance.TotalOffset.y * 100);
         }
         else if (collision.gameObject.tag.Equals("obstacle"))
         {
             GameManager.Instance.Oops(collision.gameObject.GetComponent<SpriteRenderer>().sprite);
             CameraManager.Instance.ShakeCamera();
             SoundManager.Instance.PlaySoundEffect(SoundType.Crash);
+            Instantiate(particles, collision.gameObject.transform.position, Quaternion.identity);
+            Destroy(collision.gameObject);
         }
+        collision.gameObject.tag = "Untagged";
     }
 }

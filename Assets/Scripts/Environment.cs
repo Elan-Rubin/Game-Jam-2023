@@ -11,7 +11,7 @@ public class Environment : MonoBehaviour
     [SerializeField] float playerPositionWeighting;
     [SerializeField] private GameObject backgroundPrefab;
 
-    private GameObject player;
+    [SerializeField]private GameObject player;
     private Vector3 movement;
     public Vector3 Movement { get { return movement; } }
 
@@ -21,7 +21,7 @@ public class Environment : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
     }
     #region singleton
     private static Environment _instance;

@@ -71,7 +71,8 @@ public enum SoundType
     Swoosh,
     Cash,
     Click,
-    Crash
+    Crash,
+    Scream,
 }
 
 [System.Serializable]
