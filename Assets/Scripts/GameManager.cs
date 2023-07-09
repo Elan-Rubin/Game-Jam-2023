@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour
     public int OopsCounter { get { return oopsCounter; } }
 
     [SerializeField] private TextMeshProUGUI oopsText,moneyText,timeText,moneyText2;
-    [SerializeField] private List<Image> oopsImages = new();   
+    [SerializeField] private List<Image> oopsImages = new();
+
+    [SerializeField] private GameObject overlay;
 
     private int money;
     public int Money { get {  return money; } set { money = value; } }
@@ -108,6 +110,7 @@ public class GameManager : MonoBehaviour
 
     public void Oops(Sprite sprite) 
     {
+        StartCoroutine(nameof(MakeOverlay));
         oopsImages[oopsCounter].sprite = sprite;
         oopsImages[OopsCounter].gameObject.SetActive(true);
         oopsImages[OopsCounter].transform.Rotate(0,0,Random.Range(-15f, 15f));
@@ -125,7 +128,12 @@ public class GameManager : MonoBehaviour
             //EndGame();
         }
     }
-
+    private IEnumerator MakeOverlay()
+    {
+        overlay.SetActive(true);
+        yield return new WaitForSeconds(0.34f);
+        overlay.SetActive(false);
+    }
     public void MakeMoney(int amount)
     {
         SoundManager.Instance.PlaySoundEffect(SoundType.Cash);
