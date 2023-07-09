@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
         timepanel.SetActive(false);
         player.SetActive(false);
         line.SetActive(false);
+
+        timeLeft = musicPlayer.GetComponent<AudioSource>().clip.length;
     }
 
     void Update()

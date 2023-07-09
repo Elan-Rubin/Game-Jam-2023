@@ -1792,6 +1792,8 @@ MonoBehaviour:
   player: {fileID: 780522603}
   line: {fileID: 244427118}
   objectSpawner: {fileID: 796086528}
+  timeLeft: 0
+  timerOn: 0
   oopsText: {fileID: 1620202715}
   moneyText: {fileID: 963157968}
   timeText: {fileID: 1820019547}
@@ -2333,7 +2335,10 @@ MonoBehaviour:
   canSpawnPerson: 1
   minTimeBetweenSpawns: 1
   maxTimeBetweenSpawns: 4
-  personPrefab: {fileID: 1021346177537401863, guid: b0a420f9cce77054ebaefcd52b63e381, type: 3}
+  personPrefabs:
+  - {fileID: 1021346177537401863, guid: b0a420f9cce77054ebaefcd52b63e381, type: 3}
+  - {fileID: 1021346177537401863, guid: 88c492dd387e19c4a9c3daf33e6ef4c8, type: 3}
+  - {fileID: 1021346177537401863, guid: c28644c8afdf5054a8027dc55ae754c7, type: 3}
   objectTransform: {fileID: 793626706}
 --- !u!1 &700154233
 GameObject:
@@ -3086,7 +3091,8 @@ MonoBehaviour:
   canSpawnPerson: 1
   minTimeBetweenSpawns: 1
   maxTimeBetweenSpawns: 6
-  personPrefab: {fileID: 6687708950591344120, guid: 874b57ffd2edcdb46ab437cce82b7ac2, type: 3}
+  personPrefabs:
+  - {fileID: 6687708950591344120, guid: 874b57ffd2edcdb46ab437cce82b7ac2, type: 3}
   objectTransform: {fileID: 793626706}
 --- !u!1001 &829113377
 PrefabInstance:
