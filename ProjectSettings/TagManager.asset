@@ -47,3 +47,6 @@ TagManager:
   - name: people
     uniqueID: 3528108887
     locked: 0
+  - name: hook
+    uniqueID: 1427941941
+    locked: 0
