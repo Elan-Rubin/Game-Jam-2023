@@ -7,14 +7,18 @@ using DG.Tweening;
 
 public class Person : MonoBehaviour
 {
+    public bool shouldMove = true;
     private PersonManager manager;
     private string title, dialogue; //unity was getting mad that i had a variable named name
     private int skinColor;
+    private Vector3 moveDirection;
+    [SerializeField] float moveSpeed;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject dialogueBox;
     private void Start()
     {
         StartCoroutine(nameof(LateStartCoroutine));
+        moveDirection = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5));
     }
     IEnumerator LateStartCoroutine()
     {
@@ -43,7 +47,8 @@ public class Person : MonoBehaviour
 
     void Update()
     {
-
+        if (shouldMove) 
+            transform.localPosition += moveDirection * Time.deltaTime * moveSpeed;
     }
 
     public void SaySomething() => StartCoroutine(nameof(SaySomethingCoroutine));

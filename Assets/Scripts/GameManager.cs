@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject stillfish, animfish;
     [SerializeField] private GameObject musicPlayer;
     [SerializeField] private GameObject player, line;
+    [SerializeField] private GameObject objectSpawner;
     private bool inround;
     public bool InRound { get { return inround; } }
     private bool gameOver;
@@ -71,6 +72,9 @@ public class GameManager : MonoBehaviour
         musicPlayer.GetComponent<AudioSource>().Play();
         timepanel.SetActive(true);
         inround = true;
+
+        yield return new WaitForSeconds(4f);
+        objectSpawner.SetActive(true);
     }
 
     public void Oops(Sprite sprite) 

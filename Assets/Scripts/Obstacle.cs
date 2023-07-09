@@ -16,37 +16,38 @@ public class Obstacle : MonoBehaviour
     void Start()
     {
         obstacleType = ObstacleType.Wobble;
-        if (Random.value > 0.8f) obstacleType = ObstacleType.Slide;
-        if (Random.value > 0.8f) obstacleType = ObstacleType.Woosh;
+        float selectVal = Random.value;
+        if (selectVal < 0.33f) obstacleType = ObstacleType.Slide;
+        else if (selectVal < 0.66f) obstacleType = ObstacleType.Woosh;
         switch (obstacleType)
         {
             case ObstacleType.Wobble:
-                GetComponent<Animator>().enabled = true;
+                GetComponent<Animator>().SetTrigger("Wobble");
                 break;
             case ObstacleType.Woosh:
-                StartCoroutine(nameof(Woosh));
+                GetComponent<Animator>().SetTrigger("Woosh");
                 break;
             case ObstacleType.Slide:
                 transform.position -= Vector3.one * 3;
-                StartCoroutine(nameof(Slide));
+                GetComponent<Animator>().SetTrigger("Slide");
                 break;
         }
     }
-    IEnumerator Woosh()
+    /*IEnumerator Woosh()
     {
-        transform.DOMove(transform.position + new Vector3(Random.Range(-5f, 5f), 0, 0), 1.5f);
+        /*transform.DOMove(transform.position + new Vector3(Random.Range(-5f, 5f), 0, 0), 1.5f);
         yield return null;
         //i messed this up
     }
     IEnumerator Slide()
     {
-        transform.DOMove(transform.position + new Vector3(6, 0, 0), 1.5f).OnComplete(() =>
+        /*transform.DOMove(transform.position + new Vector3(6, 0, 0), 1f).OnComplete(() =>
         {
-            transform.DOMove(transform.position + new Vector3(-6, 0, 0), 3f).OnComplete(() =>
+            transform.DOMove(transform.position + new Vector3(-6, 0, 0), 2f).OnComplete(() =>
             {
                 StartCoroutine(nameof(Slide));
             });
         });
         yield return null;
-    }
+    }*/
 }
