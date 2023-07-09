@@ -46,11 +46,11 @@ public class Environment : MonoBehaviour
         //PlayerMovement.Instance.UpdateString();
         Debug.Log(totalOffset);
 
-        if (totalOffset.y > 11.7655f + 4.290522f * backgroundCounter)
-        {
-            GameObject newThing = Instantiate(backgroundPrefab, new Vector3(0, -11.7655f - 4.290522f * backgroundCounter, 0), Quaternion.identity);
-            newThing.transform.parent = transform;
-            backgroundCounter++;
-        }
+        //if (totalOffset.y > 11.7655f + 4.290522f * backgroundCounter)
+        //{
+        //    GameObject newThing = Instantiate(backgroundPrefab, new Vector3(0, -11.7655f - 4.290522f * backgroundCounter, 0), Quaternion.identity);
+        //    newThing.transform.parent = transform;
+        //    backgroundCounter++;
+        //}
     }
 }

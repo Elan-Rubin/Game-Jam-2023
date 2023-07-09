@@ -37,6 +37,8 @@ public class PlayerMovement : MonoBehaviour
     private int counter;
     [SerializeField] private LineRenderer lineRenderer;
 
+    private List<Vector3> previousPositions = new();
+
     void Start()
     {
         mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
@@ -73,7 +75,8 @@ public class PlayerMovement : MonoBehaviour
         if (counter % 10 == 0)
         {
             lineRenderer.positionCount++;
-            lineRenderer.SetPosition(lineRenderer.positionCount -1, transform.GetChild(0).position - Environment.Instance.TotalOffset);
+            lineRenderer.SetPosition(lineRenderer.positionCount - 1, transform.GetChild(0).position - Environment.Instance.TotalOffset);
+            previousPositions.Add(transform.GetChild(0).position - Environment.Instance.TotalOffset);
             //Debug.Log(transform.GetChild(0).position);
         }
     }
@@ -102,5 +105,13 @@ public class PlayerMovement : MonoBehaviour
         newPos.y = Mathf.Clamp(newPos.y, screenBounds.y * -1 + objectHeight, screenBounds.y - objectHeight);
 
         transform.position = newPos;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Equals("person"))
+        {
+            collision.gameObject.GetComponent<Person>().SaySomething();
+        }
     }
 }
