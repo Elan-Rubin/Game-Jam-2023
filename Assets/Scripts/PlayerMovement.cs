@@ -119,6 +119,9 @@ public class PlayerMovement : MonoBehaviour
             //var list = new ContactPoint2D[0];
             //collision.GetContacts(list);
 
+            collision.GetComponent<Person>().shouldMove = false;
+            collision.gameObject.transform.parent = transform;
+
             var colpos = collision.gameObject.transform.position;
             var currpos = transform.position;
 
@@ -127,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
             //CameraManager.Instance.ShakeCamera();
             CameraManager.Instance.BounceCamera();
             x.AppendInterval(0.85f);
-            x.Append(collision.gameObject.transform.DOMove(Vector3.Lerp(colpos, currpos, 0.5f), 0.25f).OnComplete(() =>
+            x.Append(collision.gameObject.transform.DOMove(Vector3.Lerp(collision.transform.position, transform.position, 0.5f), 0.25f).OnComplete(() =>
             {
                 collision.gameObject.transform.DOScale(Vector3.zero, 0.3f);
                 //collision.gameObject.transform.parent = transform;
