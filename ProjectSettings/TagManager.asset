@@ -50,3 +50,6 @@ TagManager:
   - name: hook
     uniqueID: 1427941941
     locked: 0
+  - name: particles
+    uniqueID: 3258579147
+    locked: 0
