@@ -9,6 +9,7 @@ public class Environment : MonoBehaviour
     [SerializeField] float speedmultiplier;
     [Tooltip("How much the player's position effects the speed")]
     [SerializeField] float playerPositionWeighting;
+    [SerializeField] private GameObject backgroundPrefab;
 
     private GameObject player;
     private Vector3 movement;
@@ -16,6 +17,7 @@ public class Environment : MonoBehaviour
 
     private Vector3 totalOffset = Vector3.zero;
     public Vector3 TotalOffset { get {  return totalOffset; } }
+    private int backgroundCounter = 0;
 
     private void Start()
     {
@@ -42,5 +44,13 @@ public class Environment : MonoBehaviour
         transform.position += movement;
         totalOffset += movement;
         //PlayerMovement.Instance.UpdateString();
+        Debug.Log(totalOffset);
+
+        if (totalOffset.y > 11.7655f + 4.290522f * backgroundCounter)
+        {
+            GameObject newThing = Instantiate(backgroundPrefab, new Vector3(0, -11.7655f - 4.290522f * backgroundCounter, 0), Quaternion.identity);
+            newThing.transform.parent = transform;
+            backgroundCounter++;
+        }
     }
 }

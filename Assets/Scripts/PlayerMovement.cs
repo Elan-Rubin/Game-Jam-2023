@@ -65,9 +65,8 @@ public class PlayerMovement : MonoBehaviour
         {
             lineRenderer.positionCount++;
             lineRenderer.SetPosition(lineRenderer.positionCount -1, transform.GetChild(0).position - Environment.Instance.TotalOffset);
-            Debug.Log(transform.GetChild(0).position);
+            //Debug.Log(transform.GetChild(0).position);
         }
-        
     }
     //public void UpdateString()
     //{
