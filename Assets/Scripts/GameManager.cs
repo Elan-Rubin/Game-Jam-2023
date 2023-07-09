@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +24,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject musicPlayer;
     private bool inround;
     public bool InRound { get { return inround; } }
+    private bool gameOver;
+    public bool GameOver { get { return gameOver; } }
+
+    private int oopsCounter = 0;
+    public int OopsCounter { get { return oopsCounter; } }
+
+    [SerializeField] private TextMeshProUGUI oopsText;
+    [SerializeField] private List<Image> oopsImages = new();
+
+    private int money;
+    public int Money { get {  return money; } set { money = value; } }
+
+    
 
     void Start()
     {
@@ -47,5 +63,15 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.1f);
         musicPlayer.GetComponent<AudioSource>().Play();
         inround = true;
+    }
+
+    public void Oops(Sprite sprite) 
+    {
+        oopsImages[oopsCounter].sprite = sprite;
+        oopsImages[OopsCounter].gameObject.SetActive(true);
+        oopsImages[OopsCounter].transform.Rotate(0,0,Random.Range(-15f, 15f));
+        oopsImages[oopsCounter].transform.DOPunchScale(Vector3.one * 1.25f, 0.2f);
+        oopsText.text = $"{++oopsCounter}/4";
+        if (oopsCounter == 4) gameOver = true;
     }
 }

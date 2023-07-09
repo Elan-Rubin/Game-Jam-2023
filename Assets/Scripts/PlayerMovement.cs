@@ -97,6 +97,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
+        if (GameManager.Instance.GameOver) return;
         // Get the movement input as a Vector2 using Input.GetAxis
         movement.x = Input.GetAxis("Horizontal");
         movement.y = Input.GetAxis("Vertical");
@@ -111,6 +112,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (GameManager.Instance.GameOver) return;
         if (collision.gameObject.tag.Equals("person"))
         {
             //var list = new ContactPoint2D[0];
@@ -129,6 +131,12 @@ public class PlayerMovement : MonoBehaviour
                 collision.gameObject.transform.DOScale(Vector3.zero, 0.3f);
                 //collision.gameObject.transform.parent = transform;
             }));
+        }
+        else if (collision.gameObject.tag.Equals("obstacle"))
+        {
+            GameManager.Instance.Oops(collision.gameObject.GetComponent<SpriteRenderer>().sprite);
+            CameraManager.Instance.ShakeCamera();
+            SoundManager.Instance.PlaySoundEffect(SoundType.Crash);
         }
     }
 }

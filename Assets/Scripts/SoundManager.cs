@@ -69,7 +69,9 @@ public enum SoundType
 {
     Honk,
     Swoosh,
-    Click //add more types
+    Cash,
+    Click,
+    Crash
 }
 
 [System.Serializable]

@@ -37,7 +37,7 @@ public class Environment : MonoBehaviour
     #endregion
     private void Update()
     {
-        if (GameManager.Instance.InRound)
+        if (GameManager.Instance.InRound && !GameManager.Instance.GameOver)
         {
             //the player should descend faster when closer to the bottom of the screen
             float playerPositionMultiplier = (7 - player.transform.position.y) * playerPositionWeighting;
