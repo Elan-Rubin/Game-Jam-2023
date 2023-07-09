@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject player, line;
     [SerializeField] private GameObject objectSpawner;
     private bool inround;
+    public float timeLeft;
+    public bool timerOn = false;
     public bool InRound { get { return inround; } }
     private bool gameOver;
     public bool GameOver { get { return gameOver; } }
@@ -51,7 +53,28 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
+        if (timerOn)
+        {
+            if (timeLeft > 0)
+            {
+                timeLeft -= Time.deltaTime;
+                UpdateTimer(timeLeft);
+            }
+            else
+            {
+                EndGame();
+                timeLeft = 0;
+                timerOn = false;
+            }
+        }
+    }
+
+    private void UpdateTimer(float currentTime)
+    {
+        currentTime++;
+        float minutes = Mathf.FloorToInt(currentTime / 60);
+        float seconds = Mathf.FloorToInt(currentTime % 60);
+        timeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
     }
 
     public void StartGame()
@@ -60,6 +83,7 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator StartGameCoroutine()
     {
+        timerOn = true;
         scorePanel.SetActive(true);
         oopsPanel.SetActive(true);
         stillfish.SetActive(false);
@@ -93,6 +117,7 @@ public class GameManager : MonoBehaviour
             money = (int)(money / 2);
             moneyText.text = $"${money}";
             SoundManager.Instance.PlaySoundEffect(SoundType.Scream);
+            EndGame();
         }
     }
 
@@ -102,5 +127,10 @@ public class GameManager : MonoBehaviour
         money += amount;
         moneyText.text = $"${money}";
         moneyText.transform.DOPunchScale(Vector3.one * 1.15f, 0.2f).OnComplete(()=>moneyText.transform.localScale = Vector3.one);
+    }
+
+    public void EndGame()
+    {
+
     }
 }
