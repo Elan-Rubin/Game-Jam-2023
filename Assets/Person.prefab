@@ -134,9 +134,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e45fd1ad64067f429c4bdb7bf33e2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shouldMove: 1
   moveSpeed: 0.5
   dialogueText: {fileID: 6687708951894665573}
   dialogueBox: {fileID: 6687708951977249013}
+  clouds:
+  - {fileID: 21300000, guid: 79f012b97a00d5241b6959adb2cc4afb, type: 3}
+  - {fileID: 21300000, guid: 3fa948449671b53479bfb802b2387556, type: 3}
+  - {fileID: 21300000, guid: ef40bccf083f9f54a9d1e61f46746f1d, type: 3}
 --- !u!50 &8884584091431378918
 Rigidbody2D:
   serializedVersion: 4
@@ -1062,7 +1067,7 @@ Transform:
   m_GameObject: {fileID: 8743748386658796885}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.02, y: -0.95, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1.25}
+  m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6687708950591344123}
@@ -1106,10 +1111,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -766858409
-  m_SortingLayer: 4
+  m_SortingLayerID: -1361321509
+  m_SortingLayer: 1
   m_SortingOrder: 7
-  m_Sprite: {fileID: 21300000, guid: 09af86afd774e8c428c5c1aa588b4a09, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ef40bccf083f9f54a9d1e61f46746f1d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

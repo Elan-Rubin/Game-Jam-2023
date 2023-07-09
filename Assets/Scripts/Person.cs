@@ -15,8 +15,10 @@ public class Person : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private GameObject dialogueBox;
+    [SerializeField] private List<Sprite> clouds = new();
     private void Start()
     {
+        transform.GetChild(3).GetComponent<SpriteRenderer>().sprite = clouds[Random.Range(0, clouds.Count)];
         StartCoroutine(nameof(LateStartCoroutine));
         moveDirection = new Vector3(Random.Range(-5, 5), Random.Range(-5, 5));
     }
