@@ -52,11 +52,11 @@ TagManager:
   - name: hook
     uniqueID: 1427941941
     locked: 0
-  - name: obstacle
-    uniqueID: 2474811373
-    locked: 0
   - name: people
     uniqueID: 3528108887
+    locked: 0
+  - name: obstacle
+    uniqueID: 2474811373
     locked: 0
   - name: particles
     uniqueID: 3258579147

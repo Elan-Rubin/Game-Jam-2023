@@ -25,8 +25,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject musicPlayer;
     [SerializeField] private GameObject player, line;
     [SerializeField] private GameObject objectSpawner;
+    [SerializeField] private GameObject tro1, tro2, tro3;
+    [SerializeField] private Material mat;
     private bool inround;
-    public float timeLeft;
+    public float timeTotal, timeLeft;
     public bool timerOn = false;
     public bool InRound { get { return inround; } }
     private bool gameOver;
@@ -35,7 +37,7 @@ public class GameManager : MonoBehaviour
     private int oopsCounter = 0;
     public int OopsCounter { get { return oopsCounter; } }
 
-    [SerializeField] private TextMeshProUGUI oopsText,moneyText,timeText;
+    [SerializeField] private TextMeshProUGUI oopsText,moneyText,timeText,moneyText2;
     [SerializeField] private List<Image> oopsImages = new();   
 
     private int money;
@@ -50,6 +52,8 @@ public class GameManager : MonoBehaviour
         timepanel.SetActive(false);
         player.SetActive(false);
         line.SetActive(false);
+        gameoverScreen.SetActive(false);
+        timeTotal = timeLeft = musicPlayer.GetComponent<AudioSource>().clip.length;
     }
 
     void Update()
@@ -118,7 +122,7 @@ public class GameManager : MonoBehaviour
             money = (int)(money / 2);
             moneyText.text = $"${money}";
             SoundManager.Instance.PlaySoundEffect(SoundType.Scream);
-            EndGame();
+            //EndGame();
         }
     }
 
@@ -132,11 +136,20 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        moneyText2.text = $"your score:\n${money}";
+        Debug.Log("end game");
         StartCoroutine(EndGameCoroutine());
     }
 
     IEnumerator EndGameCoroutine()
     {
+        if (money > 1000000)
+            tro1.GetComponent<Image>().material = mat;
+        if (money > 2000000)
+            tro2.GetComponent<Image>().material = mat;
+        if (money > 3000000)
+            tro3.GetComponent<Image>().material = mat;
+
         yield return null;
         /*float timeElapsed = 0;
         while (timeElapsed < 2)

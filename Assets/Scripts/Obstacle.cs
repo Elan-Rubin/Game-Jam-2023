@@ -15,6 +15,7 @@ public class Obstacle : MonoBehaviour
     }
     void Start()
     {
+        if (Random.value > 0.5f) transform.Rotate(0, 180, 0);
         obstacleType = ObstacleType.Wobble;
         float selectVal = Random.value;
         if (selectVal < 0.33f) obstacleType = ObstacleType.Slide;
