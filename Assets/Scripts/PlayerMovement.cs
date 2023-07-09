@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -32,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
     // Vector2 representing the movement input
     private Vector2 movement;
     private Vector2 position;
-    [HideInInspector] public Vector2 Position { get { return position; } }
+    private int counter;
+    [SerializeField] private LineRenderer lineRenderer;
 
     void Start()
     {
@@ -40,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         objectWidth = transform.GetComponent<SpriteRenderer>().bounds.extents.x; //extents = size of width / 2
         objectHeight = transform.GetComponent<SpriteRenderer>().bounds.extents.y; //extents = size of height / 2
+        //lineRenderer = transform.GetChild(0).GetComponent<LineRenderer>();
     }
 
     private void FixedUpdate()
@@ -47,6 +51,45 @@ public class PlayerMovement : MonoBehaviour
         Movement();
         position = transform.position;
     }
+    private void Update()
+    {
+        //var positions = new Vector3[lineRenderer.positionCount];
+        //lineRenderer.GetPositions(positions);
+        //var newPositions = new Vector3[positions.Length + 1];
+        //for (int i = 0; i < positions.Length; i++)
+        //{
+        //    newPositions[i] = positions[i];
+        //}
+        //newPositions[newPositions.Length - 1] = transform.position;
+        ////positions[positions.Length-1] = transform.position;
+        //lineRenderer.SetPositions(newPositions);
+
+        //for (int i = 0; i < lineRenderer.positionCount; i++)
+        //{
+        //    lineRenderer.SetPosition(i, lineRenderer.GetPosition(i));
+        //}
+
+        counter++;
+        if (counter % 10 == 0)
+        {
+            lineRenderer.positionCount++;
+            lineRenderer.SetPosition(lineRenderer.positionCount -1, transform.GetChild(0).position - Environment.Instance.TotalOffset);
+            Debug.Log(transform.GetChild(0).position);
+        }
+        
+    }
+    //public void UpdateString()
+    //{
+    //    Vector3[] newList = new Vector3[lineRenderer.positionCount];
+    //    lineRenderer.GetPositions(newList);
+    //    var offset = Environment.Instance.Movement;
+    //    var newestList = new List<Vector3>();
+    //    foreach (var x in newList)
+    //    {
+    //        newestList.Add(x + offset);
+    //    }
+    //    lineRenderer.SetPositions(newestList.ToArray());
+    //}
 
     private void Movement()
     {
