@@ -33,12 +33,12 @@ public class Person : MonoBehaviour
         for (int i = 0; i < renderer.childCount; i++)
             renderer.GetChild(i).gameObject.GetComponent<SpriteRenderer>().sprite = bodyparts[i];
         //remove later
-        SaySomething();
+        //SaySomething();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) LateStart();
+
     }
 
     public void SaySomething() => StartCoroutine(nameof(SaySomethingCoroutine));

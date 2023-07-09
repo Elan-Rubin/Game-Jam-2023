@@ -67,6 +67,7 @@ public class SoundManager : MonoBehaviour
 [System.Serializable]
 public enum SoundType
 {
+    Honk,
     Click //add more types
 }
 
